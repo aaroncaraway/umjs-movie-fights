@@ -26,11 +26,22 @@
       </div>
     </section>
     <div class="container">
-      <input
-        id="movieSearch"
-        name="searchTerm"
-        placeholder="Search for a movie!"
-      />
+      <div class="dropdown is-active">
+        <input
+          id="movieSearch"
+          name="searchTerm"
+          placeholder="Search for a movie!"
+        />
+        <div class="dropdown-menu">
+          <div class="dropdown-content">
+            <a class="dropdown-item">Movie 1</a>
+            <a class="dropdown-item">2</a>
+            <a class="dropdown-item">3</a>
+            <a class="dropdown-item">4</a>
+          </div>
+        </div>
+      </div>
+
       <div id="target"></div>
     </div>
     <script src="utils.js"></script>
