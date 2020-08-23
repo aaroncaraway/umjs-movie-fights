@@ -38,15 +38,16 @@ const resultsWrapper = document.querySelector(".results");
 
 const sendInput = async (event) => {
   const movies = await fetchData(event.target.value);
-  console.log(movies);
-
+  resultsWrapper.innerHTML = "";
   dropdown.classList.add("is-active");
+
   for (let movie of movies) {
+    const imgSrc = movie.Poster === "NA" ? "" : movie.Poster;
     const option = document.createElement("a");
     option.classList.add("dropdown-item");
 
     option.innerHTML = `
-      <img src="${movie.Poster}"/>
+      <img src="${imgSrc}"/>
       ${movie.Title}
     `;
     resultsWrapper.appendChild(option);
