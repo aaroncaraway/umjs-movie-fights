@@ -64,10 +64,20 @@ const onMovieSelect = async (movie, selector, side) => {
 
   if (leftMovie && rightMovie) {
     console.log("comparison time!");
+    runComparison();
   }
 };
 
+const runComparison = () => {};
 const movieTemplate = (movieDetail) => {
+  const dollars = parseInt(
+    movieDetail.BoxOffice.replace("$", "").replace(",", "")
+  );
+  const metascore = parseInt(movieDetail.Metascore);
+  const imdbRating = parseFloat(movieDetail.imdbRating);
+  const imdbVotes = parseInt(movieDetail.imdbVotes.replace(",", ""));
+
+  console.log(dollars, metascore, imdbRating, imdbVotes);
   return `
     <article class="media">
       <figure class="media-left">
@@ -75,13 +85,38 @@ const movieTemplate = (movieDetail) => {
           <img src="${movieDetail.Poster}" alt="" />
         </p>
       </figure>
-    </article>
-    <div class="media-content">
-      <div class="content">
-        <h1>${movieDetail.Title}</h1>
-        <h4>${movieDetail.Genre}</h4>
-        <p>${movieDetail.Plot}</p>
+      <div class="media-content">
+        <div class="content">
+          <h1>${movieDetail.Title}</h1>
+          <h4>${movieDetail.Genre}</h4>
+          <p>${movieDetail.Plot}</p>
+        </div>
       </div>
-    </div>
+    </article>
+
+    <article class="notification is-primary">
+      <p class="title">${movieDetail.Awards}</p>
+      <p class="subtitle">Awards</p>
+    </article>
+
+    <article class="notification is-primary">
+      <p class="title">${movieDetail.BoxOffice}</p>
+      <p class="subtitle">Box Office</p>
+    </article>
+
+    <article class="notification is-primary">
+      <p class="title">${movieDetail.Metascore}</p>
+      <p class="subtitle">Metascore</p>
+    </article>
+
+    <article class="notification is-primary">
+      <p class="title">${movieDetail.imdbRating}</p>
+      <p class="subtitle">IMDB Rating</p>
+    </article>
+
+    <article class="notification is-primary">
+      <p class="title">${movieDetail.imdbVotes}</p>
+      <p class="subtitle">IMDB Votes</p>
+    </article>
   `;
 };
