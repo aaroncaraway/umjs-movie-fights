@@ -12,12 +12,8 @@ const fetchData = async (searchTerm) => {
   return response.data.Search;
 };
 
-input.addEventListener("input", debounce(sendInput, 500));
-
-document.addEventListener("click", (event) => {
-  if (!root.contains(event.target)) {
-    dropdown.classList.remove("is-active");
-  }
+createAutoComplete({
+  root: document.querySelector(".autocomplete"),
 });
 
 const onMovieSelect = async (movie) => {
