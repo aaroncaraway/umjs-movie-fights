@@ -60,6 +60,7 @@ const sendInput = async (event) => {
     option.addEventListener("click", () => {
       dropdown.classList.remove("is-active");
       input.value = movie.Title;
+      onMovieSelect(movie);
     });
     resultsWrapper.appendChild(option);
     // document.querySelector("#target").appendChild(div);
@@ -73,3 +74,36 @@ document.addEventListener("click", (event) => {
     dropdown.classList.remove("is-active");
   }
 });
+
+const onMovieSelect = async (movie) => {
+  const response = await axios.get("http://www.omdbapi.com/", {
+    params: {
+      apikey: "d2a7fa80",
+      i: movie.imdbID,
+    },
+  });
+
+  // const summary = document.querySelector("#summary");
+  // summary.innerHTML = movieTemplate(response.data);
+
+  document.querySelector("#summary").innerHTML = movieTemplate(response.data);
+};
+
+const movieTemplate = (movieDetail) => {
+  return `
+    <article class="media">
+      <figure class="media-left">
+        <p class="image">
+          <img src="${movieDetail.Poster}" alt="" />
+        </p>
+      </figure>
+    </article>
+    <div class="media-content">
+      <div class="content">
+        <h1>${movieDetail.Title}</h1>
+        <h4>${movieDetail.Genre}</h4>
+        <p>${movieDetail.Plot}</p>
+      </div>
+    </div>
+  `;
+};
