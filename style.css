@@ -46,3 +46,11 @@ figure .image img {
   height: 50px;
   margin-right: 10px;
 }
+
+.mf-award-height {
+  min-height: 150px;
+}
+
+.mf-media-height {
+  min-height: 220px;
+}

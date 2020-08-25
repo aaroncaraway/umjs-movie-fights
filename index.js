@@ -1,7 +1,7 @@
 const autoCompleteConfig = {
   placeholderText: "Try something like 'dark knight' or 'the apartment'",
   renderOption(movie) {
-    const imgSrc = movie.Poster === "NA" ? "" : movie.Poster;
+    const imgSrc = movie.Poster === "N/A" ? " " : movie.Poster;
     return `
       <img src="${imgSrc}"/>
       ${movie.Title} (${movie.Year})
@@ -11,7 +11,7 @@ const autoCompleteConfig = {
     return movie.Title;
   },
   async fetchData(searchTerm) {
-    const response = await axios.get("http://www.omdbapi.com/", {
+    const response = await axios.get("https://www.omdbapi.com/", {
       params: {
         apikey: "d2a7fa80",
         s: searchTerm,
@@ -46,7 +46,7 @@ createAutoComplete({
 let leftMovie;
 let rightMovie;
 const onMovieSelect = async (movie, selector, side) => {
-  const response = await axios.get("http://www.omdbapi.com/", {
+  const response = await axios.get("https://www.omdbapi.com/", {
     params: {
       apikey: "d2a7fa80",
       i: movie.imdbID,
@@ -63,7 +63,6 @@ const onMovieSelect = async (movie, selector, side) => {
   }
 
   if (leftMovie && rightMovie) {
-    console.log("comparison time!");
     runComparison();
   }
 };
@@ -89,8 +88,6 @@ const runComparison = () => {
       rightStat.classList.remove("is-primary");
       rightStat.classList.add("is-warning");
     }
-
-    console.log(leftStat, rightStat);
   });
 };
 const movieTemplate = (movieDetail) => {
@@ -110,9 +107,8 @@ const movieTemplate = (movieDetail) => {
     }
   }, 0);
 
-  console.log(dollars, metascore, imdbRating, imdbVotes, awards);
   return `
-    <article class="media">
+    <article class="media mf-media-height">
       <figure class="media-left">
         <p class="image">
           <img src="${movieDetail.Poster}" alt="" />
@@ -127,7 +123,7 @@ const movieTemplate = (movieDetail) => {
       </div>
     </article>
 
-    <article data-value=${awards} class="notification is-primary">
+    <article data-value=${awards} class="notification is-primary mf-award-height">
       <p class="title">${movieDetail.Awards}</p>
       <p class="subtitle">Awards</p>
     </article>
