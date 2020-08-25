@@ -88,15 +88,17 @@ const runComparison = () => {
       rightStat.classList.remove("is-primary");
       rightStat.classList.add("is-warning");
     }
+
+    console.log(leftSideVal, rightSideVal);
   });
 };
 const movieTemplate = (movieDetail) => {
   const dollars = parseInt(
-    movieDetail.BoxOffice.replace("$", "").replace(",", "")
+    movieDetail.BoxOffice.replace(/\$/g, "").replace(/,/g, "")
   );
   const metascore = parseInt(movieDetail.Metascore);
   const imdbRating = parseFloat(movieDetail.imdbRating);
-  const imdbVotes = parseInt(movieDetail.imdbVotes.replace(",", ""));
+  const imdbVotes = parseInt(movieDetail.imdbVotes.replace(/,/g, ""));
 
   const awards = movieDetail.Awards.split(" ").reduce((count, award) => {
     const value = parseInt(award);
